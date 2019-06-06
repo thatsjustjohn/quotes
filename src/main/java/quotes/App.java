@@ -3,12 +3,37 @@
  */
 package quotes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Random;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        //We had to set this to zero... because it made us
+        Quote[] quotes = null;
+        try {
+             quotes = readFromJson("src/main/resources/recentquotes.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Get random int for quote
+        System.out.println(quotes[(int)(Math.random()*quotes.length+1)].toString());
+    }
+
+    // This file reads from the json and returns an array of quotes
+    public static Quote[] readFromJson(String filename) throws IOException {
+        Gson read = new Gson();
+        InputStream inStream = new FileInputStream(filename);
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        Quote[] quote = read.fromJson(buffer, Quote[].class);
+        return quote;
     }
 }
