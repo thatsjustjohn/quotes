@@ -25,7 +25,7 @@ public class App {
             e.printStackTrace();
         }
         //Get random int for quote
-        System.out.println(quotes[(int)(Math.random()*quotes.length+1)].toString());
+        System.out.println(quotes[(int)(Math.random() * quotes.length )].toString());
     }
 
     // This file reads from the json and returns an array of quotes
