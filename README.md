@@ -3,9 +3,10 @@
 This application currently returns a random quote from a JSON file.  This application has a static method than can be used for reading an Array of Quote objects from a JSON file.  Once read in a random index is generated and then printed to the user.
 
 ## Struture
-```App```   
+
+```App.class```   
 ```-public static Quote[] readFromJson(String fileName)``` Takes in a filename (String) and returns an array of Quotes.  
-```Quote Class```    
+```Quote.class```    
   ```-public String toString() ```Returns a string containing the author and text of the quote.  
 
 ## Dependencies
