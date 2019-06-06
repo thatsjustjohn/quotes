@@ -5,7 +5,7 @@ This application currently returns a random quote from a JSON file.  This applic
 ## Struture
 
 ```App.class```   
-```-public static Quote[] readFromJson(String fileName)``` Takes in a filename (String) and returns an array of Quotes.  
+```-public static Quote[] readFromJson(String fileName)```Takes in a filename (String) and returns an array of Quotes.  
 ```Quote.class```    
   ```-public String toString() ```Returns a string containing the author and text of the quote.  
 
