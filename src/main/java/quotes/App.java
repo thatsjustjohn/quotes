@@ -34,10 +34,16 @@ public class App {
             String[] text = gson.fromJson(reader, String[].class);
             // Create Quote object
             Quote quote = new Quote(null, "Ron Swanson", null, text[0]);
+            addQuoteToFile(quote);
+            return quote;
+        } catch(IOException e) {
+            // This is where we check cached.
+            return getQuoteFromFile();
+        }
+    }
 
-            // Maybe write quote to file...
-            // Read and get quotes
-
+    public static boolean addQuoteToFile(Quote quote){
+        try{
             Quote[] quotes = readFromJson("src/main/resources/swansonquotes.json");
             // Add quote to array
             List<Quote> quoteList = new ArrayList<>();
@@ -46,10 +52,10 @@ public class App {
             Quote[] tempQuotes = quoteList.toArray(new Quote[quoteList.size()]);
             // Write quotes to file
             writeToJson(tempQuotes, "src/main/resources/swansonquotes.json");
-            return quote;
-        } catch(IOException e) {
-            // This is where we check cached.
-            return getQuoteFromFile();
+            return true;
+        }catch(IOException e){
+            System.out.println("There was an error writing this to the file");
+            return false;
         }
     }
 
@@ -70,7 +76,7 @@ public class App {
         OutputStream outStream = new FileOutputStream(filename);
         BufferedWriter buffer = new BufferedWriter(new OutputStreamWriter(outStream));
         write.toJson(quotes, buffer);
-        outStream.close();
+        buffer.close();
         return true;
     }
 
@@ -82,7 +88,7 @@ public class App {
         InputStream inStream = new FileInputStream(filename);
         BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
         Quote[] quotes = read.fromJson(buffer, Quote[].class);
-        inStream.close();
+        buffer.close();
         return quotes;
     }
 }
